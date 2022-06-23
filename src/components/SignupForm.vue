@@ -50,7 +50,7 @@
 <input type="text" v-model="tempSkill" @keyup.alt="addSkill">
 
     <div v-for="skill in skills" :key="skill" class="pill" >
-     <span @click="deleteSkill"> {{ skill }}</span>  
+     <span @click="deleteSkill(skill)"> {{ skill }}</span>  
     </div>
  
 
@@ -102,8 +102,16 @@ export default {
         }
         
        },
-       deleteSkill(){
-        this.skills.pop();
+       deleteSkill(skill){
+        this.skills = this.skills.filter((item) => {
+            if(skill !== item )
+            {
+                return skill
+            }
+           
+            // if the item is not equal then it will be shown in the span... else not
+            // filtter() method cycles though the array and fires a function for each item
+        })
        },
        handleSubmit(){
         this.passwordError = this.password.length > 5 ? '' : 'Password must be at least 6 character long'
